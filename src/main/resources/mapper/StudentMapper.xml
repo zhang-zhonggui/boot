@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzg.boot.mapper.StudentMapper">
+    <cache type="com.zzg.boot.config.cache.StuCache">
+    </cache>
+    <resultMap id="BaseResultMap" type="com.zzg.boot.pojo.entity.Student">
+        <!--@mbg.generated-->
+        <!--@Table student-->
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="S_name" jdbcType="VARCHAR" property="sName"/>
+        <result column="S_age" jdbcType="TIMESTAMP" property="sAge"/>
+        <result column="S_sex" jdbcType="VARCHAR" property="sSex"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, S_name, S_age, S_sex
+    </sql>
+
+    <insert id="insert" parameterType="com.zzg.boot.pojo.entity.Student">
+        <!--@mbg.generated-->
+        insert into student (id, S_name, S_age,
+                             S_sex)
+        values (#{id,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, #{sAge,jdbcType=TIMESTAMP},
+                #{sSex,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zzg.boot.pojo.entity.Student">
+        <!--@mbg.generated-->
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sName != null">
+                S_name,
+            </if>
+            <if test="sAge != null">
+                S_age,
+            </if>
+            <if test="sSex != null">
+                S_sex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},-
+            </if>
+            <if test="sName != null">
+                #{sName,jdbcType=VARCHAR},
+            </if>
+            <if test="sAge != null">
+                #{sAge,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sSex != null">
+                #{sSex,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectAllStudent" resultMap="BaseResultMap">
+        select id, S_name, S_age,S_sex from student
+    </select>
+</mapper>
