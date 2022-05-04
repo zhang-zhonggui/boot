@@ -28,4 +28,13 @@ public class StudentServiceImpl implements StudentService {
             return AjaxResult.error("查询失败");
         }
     }
+
+    @Override
+    public AjaxResult deleteStudent(int id) {
+        int i = studentMapper.deleteByIdStudent(id);
+        if (i > 0) {
+            return AjaxResult.success("删除成功");
+        }
+        return AjaxResult.error("删除失败");
+    }
 }

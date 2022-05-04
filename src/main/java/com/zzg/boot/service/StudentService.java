@@ -12,7 +12,15 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
     /**
      * 查询所以学生
+     *
      * @return
      */
     AjaxResult listAllStudent();
+
+    /**
+     * 根据学生id删除学生
+     * @param id
+     * @return
+     */
+    AjaxResult deleteStudent(int id);
 }
