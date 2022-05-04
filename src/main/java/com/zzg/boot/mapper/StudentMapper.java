@@ -26,4 +26,6 @@ public interface StudentMapper {
      * @return
      */
     List<Student> selectAllStudent();
+
+    int deleteByIdStudent(int id);
 }

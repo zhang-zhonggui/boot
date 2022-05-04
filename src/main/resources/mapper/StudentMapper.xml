@@ -60,4 +60,10 @@
         select id, S_name, S_age, S_sex
         from student
     </select>
+
+    <delete id="deleteByIdStudent">
+        delete
+        from student
+        where id = #{id}
+    </delete>
 </mapper>
