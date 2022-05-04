@@ -1,7 +1,6 @@
 package com.zzg.boot.config.cache;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.zzg.boot.utity.RedisUtity;
 import org.apache.ibatis.cache.Cache;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -11,16 +10,18 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 
 
 /**
- * 重写cache方法
+ * 重写关于stu的cache方法
  */
 public class StuCache implements Cache {
 
-
     private String id;
 
-    private static final String MYBATIS_KEY = "mybatis";
+    private static final String MYBATIS_KEY = "STUCACHE";
 
-
+    /**
+     * 活跃
+     * @return
+     */
     private RedisConnection getConnection() {
         JedisConnectionFactory bean = SpringUtil.getBean(JedisConnectionFactory.class);
         RedisConnection connection = bean.getConnection();
@@ -46,7 +47,7 @@ public class StuCache implements Cache {
         RedisConnection connection = getConnection();
 
         byte[] keyByte = (MYBATIS_KEY + key.toString()).getBytes();
-        byte[] valueByte = RedisUtity.serialize(value);
+        byte[] valueByte = new JdkSerializationRedisSerializer().serialize(value);
 
         connection.set(keyByte, valueByte);
         connection.close();
@@ -58,11 +59,13 @@ public class StuCache implements Cache {
      */
     @Override
     public Object getObject(Object key) {
+
         RedisConnection connection = getConnection();
         byte[] keyByte = (MYBATIS_KEY + key.toString()).getBytes();
         byte[] valueByte = connection.get(keyByte);
-        Object deserialize = RedisUtity.serialize(key);
+        Object deserialize = new JdkSerializationRedisSerializer().deserialize(valueByte);
         connection.close();
+
         return deserialize;
     }
 
@@ -114,4 +117,5 @@ public class StuCache implements Cache {
         return aLong.intValue();
     }
 }
+
 

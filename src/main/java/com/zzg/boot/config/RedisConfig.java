@@ -28,7 +28,6 @@ public class RedisConfig {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(standaloneConfig);
         return jedisConnectionFactory;
     }
-
     /**
      * 配置连接redis
      * @param properties

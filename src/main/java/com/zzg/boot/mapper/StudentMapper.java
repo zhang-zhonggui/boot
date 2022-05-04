@@ -7,6 +7,7 @@ import java.util.List;
 public interface StudentMapper {
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -14,10 +15,15 @@ public interface StudentMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
     int insertSelective(Student record);
 
-     List<Student> selectAllStudent();
+    /**
+     * 查询所有学生
+     * @return
+     */
+    List<Student> selectAllStudent();
 }

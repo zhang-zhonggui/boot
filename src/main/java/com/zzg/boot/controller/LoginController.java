@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("emp")
 public class LoginController {
-
-
     @ApiOperation(value = "员工登录")
     public AjaxResult empLogin() {
         return null;

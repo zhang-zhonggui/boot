@@ -57,6 +57,7 @@
     </insert>
 
     <select id="selectAllStudent" resultMap="BaseResultMap">
-        select id, S_name, S_age,S_sex from student
+        select id, S_name, S_age, S_sex
+        from student
     </select>
 </mapper>
